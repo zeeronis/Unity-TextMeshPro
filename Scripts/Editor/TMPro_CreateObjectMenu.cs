@@ -336,7 +336,12 @@ namespace TMPro.EditorUtilities
 
         private static void CreateEventSystem(bool select, GameObject parent)
         {
+            // fix API missing in Unity 2021.3.15f1 
+#if UNITY_2021_3
+            var esys = Object.FindObjectOfType<EventSystem>();
+#else
             var esys = Object.FindFirstObjectByType<EventSystem>();
+#endif
             if (esys == null)
             {
                 var eventSystem = new GameObject("EventSystem");
